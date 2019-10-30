@@ -143,16 +143,23 @@ input, textarea {
 /* COMPONENT LAYOUT END */
 /* COMPONENT SECTION START */
 .component--section {
-  
+  display: none;
 }
 .component--section.theme--header {
   padding: 16px 0;
   border-bottom: 4px solid #f7f7f9;
 }
-.component--section.theme--nav {
+.component--section.size--division {
+  padding: 64px 0;
+}
+.component--section.theme--colored {
+  background-color: #36c0d1;
+}
+.component--section.theme--bordered {
+  border-top: 4px solid #f7f7f9;
+  border-bottom: 4px solid #f7f7f9;
 }
 .component--section.theme--appointment {
-  padding: 64px 0;
   background-size: cover;
   background-position: 50% 50%;
 }
@@ -161,19 +168,6 @@ input, textarea {
 }
 [dir="rtl"] .component--section.theme--appointment {
   background-image: url('../img/section__bg--appointment--rtl.jpg');
-}
-.component--section.theme--about {
-  padding: 64px 0;
-}
-.component--section.theme--clinics {
-  padding: 64px 0;
-  background-color: #36c0d1;
-}
-.component--section.theme--videos {
-  padding: 64px 0;
-}
-.component--section.theme--contact-us {
-  padding: 64px 0;
 }
 .component--section.theme--copyright {
 }
@@ -256,11 +250,9 @@ input, textarea {
 /* COMPONENT HEADER START */
 .component--header {
   display: grid;
-  grid-template-columns: 1fr max-content 1fr;
-  align-items: center;
+  grid-gap: 8px 32px;
 }
   .header__list {
-    justify-self: start;
   }
     .header__list__items {
     }
@@ -309,9 +301,10 @@ input, textarea {
       right: 100%;
     }
   .header__social-links {
-    justify-self: end;
+    overflow: hidden;
   }
     .header__social-links ul {
+      margin: -8px;
       display: flex;
       flex-wrap: wrap;
       justify-content: center;
@@ -328,6 +321,50 @@ input, textarea {
       .header__social-links li.type--youtube {
         color: #ff0000;
       }
+@media (min-width: 1024px) {
+.component--header {
+  grid-template-columns: 1fr max-content 1fr;
+  align-items: center;
+}
+  .header__list {
+    justify-self: start;
+  }
+  .header__logo {
+  }
+  .header__social-links {
+    justify-self: end;
+  }
+}
+@media (max-width: 1023px) {
+.component--header {
+}
+  .header__list {
+    grid-area: list;
+  }
+  .header__logo {
+    grid-area: logo;
+  }
+  .header__social-links {
+    grid-area: social-links;
+  }
+}
+@media (min-width: 768px) and (max-width: 1023px) {
+.component--header {
+  grid-template-areas: "logo logo" "list social-links";
+  grid-template-columns: repeat(2, max-content);
+  justify-content: space-between;
+  align-items: center;
+}
+  .header__logo {
+    grid-column-end: span 2;
+  }
+}
+@media (max-width: 767px) {
+.component--header {
+  grid-template-areas: "logo" "list" "social-links";
+  justify-content: center;
+}
+}
 /* COMPONENT HEADER END */
 /* COMPONENT NAV START */
 .component--nav {
@@ -370,10 +407,85 @@ input, textarea {
 
       }
 /* COMPONENT NAV END */
+/* COMPONENT CONTACT US START */
+.component--contact-us {
+  display: grid;
+  grid-gap: 32px;
+}
+  .contact-us__form {
+
+  }
+    .contact-us__form__items {
+      display: grid;
+      grid-gap: 16px;
+    }
+      .contact-us__form__item {
+        display: grid;
+        grid-gap: 8px;
+        font-size: 0.8em;
+      }
+        .contact-us__form__item__label {
+          padding: 0 8px;
+          text-transform: uppercase;
+        }
+        .contact-us__form__item__input {
+
+        }
+          .contact-us__form__item__input input, .contact-us__form__item__input textarea {
+            border: 2px solid #fff;
+            border-radius: 16px;
+            padding: 4px 16px;
+            background-color: #fff;
+            line-height: 24px;
+          }
+          .contact-us__form__item__input input:focus, .contact-us__form__item__input input:hover, .contact-us__form__item__input textarea:focus, .contact-us__form__item__input textarea:hover {
+            border-color: #36c0d1;
+          }
+          .contact-us__form__item__input input[type="submit"] {
+            cursor: pointer;
+            padding-right: 32px;
+            padding-left: 32px;
+            width: auto;
+            background-color: #fff;
+            text-transform: uppercase;
+            font-weight: bold;
+            color: #36c0d1;
+          }
+          .contact-us__form__item__input input[type="submit"]:focus, .contact-us__form__item__input input[type="submit"]:hover {
+            border-color: #36c0d1;
+            background-color: #36c0d1;
+            color: #fff;
+          }
+  .contact-us__map {
+
+  }
+    .contact-us__map iframe {
+      border-radius: 16px;
+      width: 100%;
+      height: 100%;
+    }
+@media (min-width: 1024px) {
+.component--contact-us {
+  grid-template-columns: 2fr 1fr;
+}
+}
+@media (min-width: 768px) and (max-width: 1023px) {
+.component--contact-us {
+  grid-template-columns: repeat(2, 1fr);
+}
+}
+@media (max-width: 767px) {
+}
+/* COMPONENT CONTACT US END */
+/* COMPONENT COPYRIGHT START */
+.component--copyright {
+  text-align: center;
+  line-height: 2em;
+}
+/* COMPONENT COPYRIGHT US END */
 /* COMPONENT APPOINTMENT START */
 .component--appointment {
   box-sizing: border-box;
-  max-width: 480px;
   display: grid;
   grid-gap: 16px;
   color: #fff;
@@ -392,7 +504,6 @@ input, textarea {
   .appointment__main {
   }
     .appointment__form {
-      max-width: 360px;
     }
       .appointment__form__items {
         display: grid;
@@ -435,11 +546,23 @@ input, textarea {
               background-color: #36c0d1;
               color: #fff;
             }
+@media (min-width: 768px) {
+.component--appointment {
+  max-width: 480px;
+}
+    .appointment__form {
+      max-width: 360px;
+    }
+}
+@media (max-width: 767px) {
+  .appointment__header {
+    text-align: center;
+  }
+}
 /* COMPONENT APPOINTMENT END */
 /* COMPONENT ABOUT START */
 .component--about {
   display: grid;
-  grid-template-columns: 256px 1fr;
   grid-gap: 32px;
   align-items: center;
 }
@@ -447,7 +570,8 @@ input, textarea {
     position: relative;
     border: 4px solid rgba(54, 192, 209, 0.1);
     border-radius: 50%;
-    padding-top: 100%;
+    padding-top: 240px;
+    width: 240px;
   }
   .about__image::after {
     content: '';
@@ -535,27 +659,39 @@ input, textarea {
         right: 8px;
         transform: translateY(-50%) translateX(50%)
       }
+@media (min-width: 1024px) {
+.component--about {
+  grid-template-columns: max-content 1fr;
+}
+}
+@media (max-width: 1023px) {
+.component--about {
+  justify-items: center;
+}
+    .about__content h1 {
+      text-align: center;
+    }
+}
 /* COMPONENT ABOUT END */
-/* COMPONENT CLINICS START */
-.component--clinics {
+/* COMPONENT DEPARTMENTS START */
+.component--departments {
 
 }
-  .clinics__items {
+  .departments__items {
     display: grid;
-    grid-template-columns: repeat(3, 1fr);
     grid-gap: 32px;
   }
-    .clinics__item {
+    .departments__item {
       position: relative;
       border: 8px solid rgba(0, 0, 0, 0.4);
       border-top-width: 0;
       border-bottom-width: 0;
       overflow: hidden;
     }
-      .clinics__item__image {
+      .departments__item__image {
         padding-top: 56.25%;
       }
-        .clinics__item__image img {
+        .departments__item__image img {
           position: absolute;
           top: 0;
           right: 0;
@@ -567,12 +703,12 @@ input, textarea {
           transition: all 0.35s;
           -webkit-transition: all 0.35s;
         }
-        .clinics__item:hover img {
+        .departments__item:hover img {
           filter: url('data:image/svg+xml;charset=utf-8,<svg xmlns="http://www.w3.org/2000/svg"><filter id="filter"><feComponentTransfer color-interpolation-filters="sRGB"><feFuncR type="linear" slope="0.6" /><feFuncG type="linear" slope="0.6" /><feFuncB type="linear" slope="0.6" /></feComponentTransfer></filter></svg>#filter');
           filter: brightness(0.6);
           -webkit-filter: brightness(0.6);
         }
-      .clinics__item__content {
+      .departments__item__content {
         position: absolute;
         top: 10%;
         right: 10%;
@@ -595,25 +731,25 @@ input, textarea {
         text-align: center;
         color: #fff;
       }
-      .clinics__item:hover .clinics__item__content {
+      .departments__item:hover .departments__item__content {
         opacity: 1;
         filter: alpha(opacity=100);
         transform: scale(1);
         -webkit-transform: scale(1);
         -ms-transform: scale(1);
       }
-        .clinics__item__title, .clinics__item__link {
+        .departments__item__title, .departments__item__link {
           opacity: 0;
           filter: alpha(opacity=0);
           -webkit-transition: opacity 0.35s, -webkit-transform 0.35s;
           transition: opacity 0.35s, transform 0.35s;
         }
-        .clinics__item__title {
+        .departments__item__title {
           -webkit-transform: translate3d(0,-100%,0);
           transform: translate3d(0,-100%,0);
           font-size: 1.4em;
         }
-        .clinics__item__link {
+        .departments__item__link {
           -webkit-transform: translate3d(0,100%,0);
           transform: translate3d(0,100%,0);
           border-radius: 12px;
@@ -621,20 +757,103 @@ input, textarea {
           background-color: #36c0d1;
           line-height: 32px;
         }
-        .clinics__item:hover .clinics__item__title, .clinics__item:hover .clinics__item__link {
+        .departments__item:hover .departments__item__title, .departments__item:hover .departments__item__link {
           opacity: 1;
           filter: alpha(opacity=100);
           -webkit-transform: translate3d(0,0,0);
           transform: translate3d(0,0,0);
         }
-/* COMPONENT CLINICS END */
+@media (min-width: 1024px) {
+  .departments__items {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+@media (min-width: 768px) and (max-width: 1023px) {
+  .departments__items {
+    grid-template-columns: repeat(4, 1fr);
+  }
+    .departments__item {
+      grid-column-end: span 2;
+    }
+    .departments__item:nth-child(odd):last-child {
+      grid-column-start: 2;
+    }
+}
+/* COMPONENT DEPARTMENTS END */
+/* COMPONENT OFFERS START */
+.component--offers {
+  display: grid;
+  grid-gap: 32px;
+}
+  .offers__categories {
+    
+  }
+    .offers__categories ul {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+    }
+      .offers__categories li {
+        margin: 8px;
+        border: 2px solid #36c0d1;
+        border-radius: 12px;
+        padding: 0 16px;
+        background-color: #fff;
+        text-transform: uppercase;
+        line-height: 32px;
+        color: #36c0d1;
+      }
+      .offers__categories li.status--active, .offers__categories li:hover {
+        background-color: #36c0d1;
+        color: #fff;
+      }
+        .offers__categories a {
+          
+        }
+  .offers__items {
+    display: grid;
+    grid-gap: 32px;
+  }
+    .offers__item {
+
+    }
+      .offers__item__image {
+        position: relative;
+        padding-top: 100%;
+      }
+        .offers__item__image img {
+          position: absolute;
+          top: 0;
+          right: 0;
+          bottom: 0;
+          left: 0;
+          width: 100%;
+          height: 100%;
+          object-fit: cover;
+        }
+@media (min-width: 1024px) {
+  .offers__items {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+@media (min-width: 768px) and (max-width: 1023px) {
+  .offers__items {
+    grid-template-columns: repeat(4, 1fr);
+  }
+    .offers__item {
+      grid-column-end: span 2;
+    }
+    .offers__item:nth-child(odd):last-child {
+      grid-column-start: 2;
+    }
+}
+/* COMPONENT OFFERS END */
 /* COMPONENT VIDEOS START */
 .component--videos {
 
 }
   .videos__items {
     display: grid;
-    grid-template-columns: repeat(3, 1fr);
     grid-gap: 32px;
     align-items: start;
   }
@@ -661,68 +880,78 @@ input, textarea {
       .videos__item__title::first-letter {
         text-transform: uppercase;
       }
+@media (min-width: 1024px) {
+  .videos__items {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+@media (min-width: 768px) and (max-width: 1023px) {
+  .videos__items {
+    grid-template-columns: repeat(4, 1fr);
+  }
+    .videos__item {
+      grid-column-end: span 2;
+    }
+    .videos__item:nth-child(odd):last-child {
+      grid-column-start: 2;
+    }
+}
 /* COMPONENT VIDEOS END */
-/* COMPONENT CONTACT US START */
-.component--contact-us {
-  display: grid;
-  grid-template-columns: 2fr 1fr;
-  grid-gap: 32px;
-}
-  .contact-us__form {
+/* COMPONENT TESTIMONIALS START */
+.component--testimonials {
 
+}
+  .testimonials__items {
+    display: grid;
+    grid-gap: 32px;
   }
-    .contact-us__form__items {
+    .testimonials__item {
       display: grid;
-      grid-gap: 16px;
+      justify-items: center;
     }
-      .contact-us__form__item {
-        display: grid;
-        grid-gap: 8px;
-        font-size: 0.8em;
+      .testimonials__item__image {
+        position: relative;
+        border: 4px solid #36c0d1;
+        border-top-color: transparent;
+        border-bottom-color: transparent;
+        border-radius: 50%;
+        width: 64px;
+        padding-top: 64px;
       }
-        .contact-us__form__item__label {
-          padding: 0 8px;
-          text-transform: uppercase;
+        .testimonials__item__image img {
+          position: absolute;
+          top: 0;
+          right: 0;
+          bottom: 0;
+          left: 0;
+          border-radius: inherit;
+          width: 100%;
+          height: 100%;
+          object-fit: cover;
         }
-        .contact-us__form__item__input {
-
-        }
-          .contact-us__form__item__input input, .contact-us__form__item__input textarea {
-            border: 2px solid #fff;
-            border-radius: 16px;
-            padding: 4px 16px;
-            background-color: #fff;
-            line-height: 24px;
-          }
-          .contact-us__form__item__input input:focus, .contact-us__form__item__input input:hover, .contact-us__form__item__input textarea:focus, .contact-us__form__item__input textarea:hover {
-            border-color: #36c0d1;
-          }
-          .contact-us__form__item__input input[type="submit"] {
-            cursor: pointer;
-            padding-right: 32px;
-            padding-left: 32px;
-            width: auto;
-            background-color: #fff;
-            text-transform: uppercase;
-            font-weight: bold;
-            color: #36c0d1;
-          }
-          .contact-us__form__item__input input[type="submit"]:focus, .contact-us__form__item__input input[type="submit"]:hover {
-            border-color: #36c0d1;
-            background-color: #36c0d1;
-            color: #fff;
-          }
-  .contact-us__map {
-
+      .testimonials__item__content {
+        margin-top: -36px;
+        box-sizing: border-box;
+        border: 4px solid #36c0d1;
+        border-radius: 16px;
+        padding: 40px 24px 16px;
+        text-align: center;
+      }
+@media (min-width: 768px) {
+  .testimonials__items {
+    grid-template-columns: repeat(3, 1fr);
   }
-    .contact-us__map iframe {
-      border-radius: 16px;
-      width: 100%;
-      height: 100%;
+    .testimonials__item:not(.type--current):not(.type--previous):not(.type--next) {
+      display: none;
     }
-/* COMPONENT CONTACT US END */
-/* COMPONENT COPYRIGHT START */
-.component--copyright {
-  text-align: center;
+    .testimonials__item:not(.type--current) {
+      transform: scale(0.8);
+      opacity: 0.8;
+    }
 }
-/* COMPONENT COPYRIGHT US END */
+@media (max-width: 767px) {
+  .testimonials__item:not(.type--current) {
+    display: none;
+  }
+}
+/* COMPONENT TESTIMONIALS END */
